@@ -4,12 +4,13 @@
 
 @layer base {
   :root {
-    --mainBg: #e3e3e3;
+    --mainBg: #ffe9e0;
     --mainText: #201f24;
   }
 
   body {
     background-image: url("../public/bgPattern.svg");
+    background-color: var(--mainBg);
     color: var(--mainText);
     width: 100vw;
     height: 100vh;
