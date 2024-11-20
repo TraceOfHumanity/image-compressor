@@ -28,14 +28,21 @@ function App() {
   return (
     <div className="container h-screen max-h-screen px-4 py-8 md:px-8 md:py-16">
       <h1 className="text-2xl font-bold text-center">Image compressor</h1>
-      <input
-        type="file"
-        onChange={handleFileChange}
-        accept="image/*"
-        multiple
-      />
 
-      <button onClick={downloadAll}>Download all</button>
+      <div className="border-2 w-full h-40 border-dashed border-mainText rounded-md bg-mainBg">
+        <input
+          className="w-full h-full opacity-0"
+          type="file"
+          onChange={handleFileChange}
+          accept="image/*"
+          multiple
+        />
+      </div>
+
+      {compressedImages.length > 0 && (
+        <button onClick={downloadAll}>Download all</button>
+      )}
+
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
         {files.map((file) => (
           <CompressedImage
