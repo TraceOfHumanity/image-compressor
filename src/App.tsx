@@ -3,7 +3,7 @@ import {CompressedImage} from "./components/CompressedImage";
 
 function App() {
   const [files, setFiles] = useState<File[]>([]);
-  // console.log(file);
+  
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
@@ -21,7 +21,7 @@ function App() {
       />
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
         {files.map((file) => (
-          <CompressedImage file={file} />
+          <CompressedImage key={file.name} file={file} />
         ))}
       </div>
     </div>

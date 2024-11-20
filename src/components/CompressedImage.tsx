@@ -42,13 +42,23 @@ export const CompressedImage = ({file}: {file: File}) => {
     }
   }, [file]);
 
+  
   if (!newImage) {
     return null;
   }
+  const handleDownload = () => {
+    const a = document.createElement("a");
+    a.href = newImage.url;
+    a.download = file.name;
+    a.click();
+  };
 
   return (
     <div className="flex flex-col gap-2 relative group">
-      <button className="absolute top-1 right-1 rounded-full bg-white p-2 opacity-0 group-hover:opacity-100">
+      <button
+        className="absolute top-1 right-1 rounded-full bg-white p-2 opacity-0 group-hover:opacity-100"
+        onClick={handleDownload}
+      >
         <FaDownload />
       </button>
       <img src={newImage.url} alt="" style={{maxWidth: "100%"}} />
