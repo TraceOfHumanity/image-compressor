@@ -3,7 +3,11 @@ import Resizer from "react-image-file-resizer";
 import prettyBytes from "pretty-bytes";
 
 export const FileInput = ({file}: {file: File}) => {
-  const [newImage, setNewImage] = useState();
+  const [newImage, setNewImage] = useState<{
+    url: string;
+    size: number;
+    type: string;
+  }>();
 
   const handleImage = (image: {url: string; size: number; type: string}) => {
     setNewImage(image);
@@ -42,9 +46,12 @@ export const FileInput = ({file}: {file: File}) => {
   }
 
   return (
-    <>
-      <figure>{`${prettyBytes(newImage.size)} ${newImage.type}`}</figure>
+    <div className="flex flex-col gap-2">
       <img src={newImage.url} alt="" style={{maxWidth: "100%"}} />
-    </>
+      <div className="">
+        <figure>{`original size: ${prettyBytes(file.size)}`}</figure>
+        <figure>{`compressed size: ${prettyBytes(newImage.size)}`}</figure>
+      </div>
+    </div>
   );
 };
