@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --mainBg: #e3e3e3;
+    --mainText: #201f24;
+  }
+
+  body {
+    background-image: url("../public/bgPattern.svg");
+    color: var(--mainText);
+    width: 100vw;
+    height: 100vh;
+  }
+}
