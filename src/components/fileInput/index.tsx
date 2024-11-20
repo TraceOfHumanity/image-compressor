@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import Resizer from "react-image-file-resizer";
 import prettyBytes from "pretty-bytes";
 
 export const FileInput = ({file}: {file: File}) => {
   const [newImage, setNewImage] = useState();
-  
+
   const handleImage = (image: {url: string; size: number; type: string}) => {
     setNewImage(image);
   };
