@@ -3,15 +3,32 @@ import Resizer from "react-image-file-resizer";
 import prettyBytes from "pretty-bytes";
 import {FaDownload} from "react-icons/fa";
 
-export const CompressedImage = ({file}: {file: File}) => {
+export const CompressedImage = ({
+  file,
+  setCompressedImages,
+}: {
+  file: File;
+  setCompressedImages: React.Dispatch<
+    React.SetStateAction<
+      {url: string; size: number; type: string; name: string}[]
+    >
+  >;
+}) => {
   const [newImage, setNewImage] = useState<{
     url: string;
     size: number;
     type: string;
+    name: string;
   }>();
 
-  const handleImage = (image: {url: string; size: number; type: string}) => {
+  const handleImage = (image: {
+    url: string;
+    size: number;
+    type: string;
+    name: string;
+  }) => {
     setNewImage(image);
+    setCompressedImages((prev) => [...prev, image]);
   };
 
   useEffect(() => {
@@ -30,6 +47,7 @@ export const CompressedImage = ({file}: {file: File}) => {
               url: URL.createObjectURL(blob),
               size: blob.size,
               type: blob.type,
+              name: file.name,
             });
           },
           "blob",
@@ -42,14 +60,13 @@ export const CompressedImage = ({file}: {file: File}) => {
     }
   }, [file]);
 
-  
   if (!newImage) {
     return null;
   }
   const handleDownload = () => {
     const a = document.createElement("a");
     a.href = newImage.url;
-    a.download = file.name;
+    a.download = newImage.name;
     a.click();
   };
 
