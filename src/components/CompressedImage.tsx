@@ -1,8 +1,9 @@
 import {useEffect, useState} from "react";
 import Resizer from "react-image-file-resizer";
 import prettyBytes from "pretty-bytes";
+import {FaDownload} from "react-icons/fa";
 
-export const FileInput = ({file}: {file: File}) => {
+export const CompressedImage = ({file}: {file: File}) => {
   const [newImage, setNewImage] = useState<{
     url: string;
     size: number;
@@ -46,7 +47,10 @@ export const FileInput = ({file}: {file: File}) => {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 relative group">
+      <button className="absolute top-1 right-1 rounded-full bg-white p-2 opacity-0 group-hover:opacity-100">
+        <FaDownload />
+      </button>
       <img src={newImage.url} alt="" style={{maxWidth: "100%"}} />
       <div className="">
         <figure>{`original size: ${prettyBytes(file.size)}`}</figure>

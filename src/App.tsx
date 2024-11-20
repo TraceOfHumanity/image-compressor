@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {FileInput} from "./components/fileInput";
+import {CompressedImage} from "./components/CompressedImage";
 
 function App() {
   const [files, setFiles] = useState<File[]>([]);
@@ -21,7 +21,7 @@ function App() {
       />
       <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
         {files.map((file) => (
-          <FileInput file={file} />
+          <CompressedImage file={file} />
         ))}
       </div>
     </div>
