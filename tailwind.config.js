@@ -6,6 +6,8 @@ export default {
       colors: {
         mainBg: "var(--mainBg)",
         mainText: "var(--mainText)",
+        bodyBgFrom: "var(--bodyBgFrom)",
+        bodyBgTo: "var(--bodyBgTo)",
       },
     },
     container: {
