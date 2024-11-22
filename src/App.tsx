@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {CompressedImage} from "./components/CompressedImage";
-import {FaDownload} from "react-icons/fa";
+import {FaDownload, FaUpload} from "react-icons/fa";
 
 function App() {
   const [files, setFiles] = useState<File[]>([]);
@@ -27,10 +27,12 @@ function App() {
   };
 
   return (
-    <div className="container h-screen max-h-screen px-4 py-8 md:px-8 md:py-16 flex flex-col gap-4">
-      <h1 className="text-2xl font-bold text-center">Image compressor</h1>
+    <div className="container h-screen max-h-screen px-4 py-8 md:px-8 md:py-16 flex flex-col gap-4 overflow-y-auto">
+      <h1 className="text-2xl mb-4 md:mb-8 font-bold text-center">
+        Image compressor
+      </h1>
 
-      <div className="my-auto border-2 w-full min-h-40 border-dashed border-mainText rounded-md bg-mainBg relative">
+      <div className="border-2 w-full min-h-40 border-dashed border-mainText backdrop-blur-3xl rounded-md hover:bg-slate-950/5 duration-200 relative">
         <input
           className="w-full h-full opacity-0"
           type="file"
@@ -38,9 +40,10 @@ function App() {
           accept="image/*"
           multiple
         />
-        <p className="text-mainText text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          Drag and drop or click to select images
-        </p>
+        <div className="text-mainText text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+          <p>Drag and drop or click to select images</p>
+          <FaUpload className="text-2xl inline-block" />
+        </div>
       </div>
 
       {compressedImages.length > 0 && (
@@ -52,7 +55,7 @@ function App() {
         </button>
       )}
 
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 pb-5 md:pb-16" >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3 pb-5 md:pb-16">
         {files.map((file) => (
           <CompressedImage
             key={file.name}
