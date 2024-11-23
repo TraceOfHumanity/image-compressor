@@ -3,6 +3,12 @@ import {CompressedImage} from "./components/CompressedImage";
 import {FaDownload, FaUpload} from "react-icons/fa";
 
 function App() {
+  const [maxImageWidth, setMaxImageWidth] = useState(1500);
+  const [maxImageHeight, setMaxImageHeight] = useState(1500);
+  const [minImageWidth, setMinImageWidth] = useState(400);
+  const [minImageHeight, setMinImageHeight] = useState(400);
+  const [quality, setQuality] = useState(90);
+
   const [files, setFiles] = useState<File[]>([]);
   const [compressedImages, setCompressedImages] = useState<
     {url: string; size: number; type: string; name: string}[]
@@ -31,6 +37,66 @@ function App() {
       <h1 className="text-2xl mb-4 md:mb-8 font-bold text-center font-eduBeginner">
         Image compressor
       </h1>
+
+      <div className="grid sm:grid-cols-2 gap-4 lg:grid-cols-4">
+        <div className="">
+          <label htmlFor="maxImageWidth">Max width {maxImageWidth} (px)</label>
+          <input
+            type="range"
+            id="maxImageWidth"
+            value={maxImageWidth}
+            min={minImageWidth + 100}
+            max={2000}
+            onChange={(e) => setMaxImageWidth(parseInt(e.target.value))}
+          />
+        </div>
+        <div className="">
+          <label htmlFor="maxImageHeight">
+            Max height {maxImageHeight} (px)
+          </label>
+          <input
+            type="range"
+            id="maxImageHeight"
+            value={maxImageHeight}
+            min={minImageHeight + 100}
+            max={2000}
+            onChange={(e) => setMaxImageHeight(parseInt(e.target.value))}
+          />
+        </div>
+        <div className="">
+          <label htmlFor="minImageWidth">Min width {minImageWidth} (px)</label>
+          <input
+            type="range"
+            id="minImageWidth"
+            value={minImageWidth}
+            min={100}
+            max={maxImageWidth - 200}
+            onChange={(e) => setMinImageWidth(parseInt(e.target.value))}
+          />
+        </div>
+        <div className="">
+          <label htmlFor="minImageHeight">
+            Min height {minImageHeight} (px)
+          </label>
+          <input
+            type="range"
+            id="minImageHeight"
+            value={minImageHeight}
+            min={100}
+            max={maxImageHeight - 200}
+            onChange={(e) => setMinImageHeight(parseInt(e.target.value))}
+          />
+        </div>
+        <div className="">
+          <label htmlFor="quality">Quality {quality}%</label>
+          <input
+            type="range"
+            id="quality"
+            value={quality}
+            onChange={(e) => setQuality(parseInt(e.target.value))}
+          />
+        </div>
+      </div>
 
       <div className="border-2 w-full min-h-40 border-dashed border-mainText backdrop-blur-3xl rounded-md hover:bg-slate-950/5 duration-200 relative">
         <input

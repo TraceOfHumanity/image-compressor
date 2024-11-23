@@ -3,7 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   :root {
     --bodyBgFrom: #c2f5e0;
@@ -23,4 +22,35 @@
     width: 0;
     height: 0;
   }
+}
+
+input[type="range"] {
+  @apply bg-transparent border-none outline-none w-full appearance-none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #ffffff6a;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  position: relative; 
+  top: -2px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #ffffff6a;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  position: relative;
+  top: -2px;
+}
+
+/* className="h-1.5 w-full cursor-pointer appearance-none rounded-2xl bg-gradient-to-r from-red-700 via-orange-500 to-green-600 font-bold transition-all duration-300 ease-in-out" */
+
+input[type="range"]::-webkit-slider-runnable-track {
+  @apply h-3 w-full cursor-pointer appearance-none rounded-2xl bg-gradient-to-r from-bodyBgTo to-bodyBgFrom font-bold transition-all duration-300 ease-in-out border border-black;
 }
