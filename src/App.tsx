@@ -39,6 +39,15 @@ function App() {
       </h1>
 
       <div className="grid sm:grid-cols-2 gap-4 lg:grid-cols-4">
+        <div className="col-span-full">
+          <label htmlFor="quality">Quality {quality}%</label>
+          <input
+            type="range"
+            id="quality"
+            value={quality}
+            onChange={(e) => setQuality(parseInt(e.target.value))}
+          />
+        </div>
         <div className="">
           <label htmlFor="maxImageWidth">Max width {maxImageWidth} (px)</label>
           <input
@@ -85,15 +94,6 @@ function App() {
             min={100}
             max={maxImageHeight - 200}
             onChange={(e) => setMinImageHeight(parseInt(e.target.value))}
-          />
-        </div>
-        <div className="">
-          <label htmlFor="quality">Quality {quality}%</label>
-          <input
-            type="range"
-            id="quality"
-            value={quality}
-            onChange={(e) => setQuality(parseInt(e.target.value))}
           />
         </div>
       </div>
