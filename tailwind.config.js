@@ -9,6 +9,9 @@ export default {
         bodyBgFrom: "var(--bodyBgFrom)",
         bodyBgTo: "var(--bodyBgTo)",
       },
+      fontFamily: {
+        eduBeginner: ["Edu SA Beginner", "sans-serif"],
+      },
     },
     container: {
       center: true,

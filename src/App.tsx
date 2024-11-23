@@ -28,7 +28,7 @@ function App() {
 
   return (
     <div className="container h-screen max-h-screen px-4 py-8 md:px-8 md:py-16 flex flex-col gap-4 overflow-y-auto">
-      <h1 className="text-2xl mb-4 md:mb-8 font-bold text-center">
+      <h1 className="text-2xl mb-4 md:mb-8 font-bold text-center font-eduBeginner">
         Image compressor
       </h1>
 

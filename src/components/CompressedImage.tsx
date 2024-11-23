@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import Resizer from "react-image-file-resizer";
 import prettyBytes from "pretty-bytes";
 import {FaDownload} from "react-icons/fa";
+import {MdPhotoSizeSelectActual, MdPhotoSizeSelectLarge} from "react-icons/md";
 
 export const CompressedImage = ({
   file,
@@ -39,7 +40,7 @@ export const CompressedImage = ({
           file,
           1500,
           1500,
-          "JPEG",
+          file.type,
           90,
           0,
           (blob) => {
@@ -71,7 +72,7 @@ export const CompressedImage = ({
   };
 
   return (
-    <div className="flex flex-col gap-2 relative group">
+    <div className="flex flex-col gap-2 relative group border border-black rounded-md p-1">
       <button
         className="absolute top-1 right-1 rounded-full bg-white p-2 opacity-0 group-hover:opacity-100"
         onClick={handleDownload}
@@ -80,8 +81,14 @@ export const CompressedImage = ({
       </button>
       <img src={newImage.url} alt="" style={{maxWidth: "100%"}} />
       <div className="">
-        <figure>{`original size: ${prettyBytes(file.size)}`}</figure>
-        <figure>{`compressed size: ${prettyBytes(newImage.size)}`}</figure>
+        <figure className="flex items-center gap-1">
+          <MdPhotoSizeSelectActual />{" "}
+          {`original size: ${prettyBytes(file.size)}`}
+        </figure>
+        <figure className="flex items-center gap-1">
+          <MdPhotoSizeSelectLarge />
+          {`compressed size: ${prettyBytes(newImage.size)}`}
+        </figure>
       </div>
     </div>
   );
