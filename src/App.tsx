@@ -1,20 +1,29 @@
 import {useEffect, useState} from "react";
-import {FaDownload, FaUpload} from "react-icons/fa";
+import {FaUpload} from "react-icons/fa";
 import {Loader} from "./components/Loader";
 import {CompressedImages} from "./components/CompressedImages";
+import {ImageSettings} from "./components/ImageSettings";
+import {DownloadAllImages} from "./components/DownloadAllImages";
+
+export type CompressedFile = {
+  url: string;
+  size: number;
+  type: string;
+  name: string;
+};
 
 function App() {
+  const [isLoading, setIsLoading] = useState(false);
   const [maxImageWidth, setMaxImageWidth] = useState(1500);
   const [maxImageHeight, setMaxImageHeight] = useState(1500);
   const [minImageWidth, setMinImageWidth] = useState(512);
   const [minImageHeight, setMinImageHeight] = useState(512);
-  // const [quality] = useState(90);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [quality, setQuality] = useState(90);
 
   const [files, setFiles] = useState<File[]>([]);
-  const [compressedImages, setCompressedImages] = useState<
-    {url: string; size: number; type: string; name: string}[]
-  >([]);
+  const [compressedImages, setCompressedImages] = useState<CompressedFile[]>(
+    []
+  );
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -26,14 +35,14 @@ function App() {
 
   console.log(compressedImages);
 
-  const downloadAll = () => {
-    compressedImages.forEach((image) => {
-      const a = document.createElement("a");
-      a.href = image.url;
-      a.download = image.name;
-      a.click();
-    });
-  };
+  // const downloadAll = () => {
+  //   compressedImages.forEach((image) => {
+  //     const a = document.createElement("a");
+  //     a.href = image.url;
+  //     a.download = image.name;
+  //     a.click();
+  //   });
+  // };
 
   useEffect(() => {
     setIsLoading(false);
@@ -58,66 +67,17 @@ function App() {
           <FaUpload className="text-2xl inline-block" />
         </div>
       </div>
-      <p className="font-bold">Settings for the output file</p>
-      <div className="grid sm:grid-cols-2 gap-4 lg:grid-cols-4">
-        <div className="">
-          <label htmlFor="maxImageWidth">Max width {maxImageWidth} (px)</label>
-          <input
-            type="range"
-            id="maxImageWidth"
-            value={maxImageWidth}
-            min={minImageWidth + 100}
-            max={2000}
-            onChange={(e) => setMaxImageWidth(parseInt(e.target.value))}
-          />
-        </div>
-        <div className="">
-          <label htmlFor="maxImageHeight">
-            Max height {maxImageHeight} (px)
-          </label>
-          <input
-            type="range"
-            id="maxImageHeight"
-            value={maxImageHeight}
-            min={minImageHeight + 100}
-            max={2000}
-            onChange={(e) => setMaxImageHeight(parseInt(e.target.value))}
-          />
-        </div>
-        <div className="">
-          <label htmlFor="minImageWidth">Min width {minImageWidth} (px)</label>
-          <input
-            type="range"
-            id="minImageWidth"
-            value={minImageWidth}
-            min={100}
-            max={maxImageWidth - 200}
-            onChange={(e) => setMinImageWidth(parseInt(e.target.value))}
-          />
-        </div>
-        <div className="">
-          <label htmlFor="minImageHeight">
-            Min height {minImageHeight} (px)
-          </label>
-          <input
-            type="range"
-            id="minImageHeight"
-            value={minImageHeight}
-            min={100}
-            max={maxImageHeight - 200}
-            onChange={(e) => setMinImageHeight(parseInt(e.target.value))}
-          />
-        </div>
-      </div>
-
-      {compressedImages.length > 0 && (
-        <button
-          className="flex items-center gap-2 w-fit ml-auto"
-          onClick={downloadAll}
-        >
-          Download all <FaDownload />
-        </button>
-      )}
+      <ImageSettings
+        maxImageWidth={maxImageWidth}
+        maxImageHeight={maxImageHeight}
+        minImageWidth={minImageWidth}
+        minImageHeight={minImageHeight}
+        setMaxImageWidth={setMaxImageWidth}
+        setMaxImageHeight={setMaxImageHeight}
+        setMinImageWidth={setMinImageWidth}
+        setMinImageHeight={setMinImageHeight}
+      />
+      <DownloadAllImages compressedImages={compressedImages} />
       <CompressedImages
         files={files}
         setCompressedImages={setCompressedImages}
