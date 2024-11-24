@@ -7,6 +7,11 @@ import {MdPhotoSizeSelectActual, MdPhotoSizeSelectLarge} from "react-icons/md";
 export const CompressedImage = ({
   file,
   setCompressedImages,
+  maxImageWidth = 2000,
+  maxImageHeight = 2000,
+  minImageWidth = 400,
+  minImageHeight = 400,
+  quality = 90,
 }: {
   file: File;
   setCompressedImages: React.Dispatch<
@@ -14,6 +19,11 @@ export const CompressedImage = ({
       {url: string; size: number; type: string; name: string}[]
     >
   >;
+  maxImageWidth: number;
+  maxImageHeight: number;
+  minImageWidth: number;
+  minImageHeight: number;
+  quality?: number;
 }) => {
   const [newImage, setNewImage] = useState<{
     url: string;
@@ -38,22 +48,23 @@ export const CompressedImage = ({
       try {
         Resizer.imageFileResizer(
           file,
-          1500,
-          1500,
-          file.type,
-          90,
+          maxImageWidth,
+          maxImageHeight,
+          file.type === "image/jpeg" ? "JPEG" : file.type,
+          // "JPEG",
+          quality,
           0,
           (blob) => {
             handleImage({
-              url: URL.createObjectURL(blob),
-              size: blob.size,
-              type: blob.type,
+              url: URL.createObjectURL(blob as Blob),
+              size: (blob as Blob).size,
+              type: (blob as Blob).type,
               name: file.name,
             });
           },
           "blob",
-          400,
-          400
+          minImageWidth,
+          minImageHeight
         );
       } catch (err) {
         console.log(err);

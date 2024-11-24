@@ -1,13 +1,14 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {CompressedImage} from "./components/CompressedImage";
 import {FaDownload, FaUpload} from "react-icons/fa";
 
 function App() {
   const [maxImageWidth, setMaxImageWidth] = useState(1500);
   const [maxImageHeight, setMaxImageHeight] = useState(1500);
-  const [minImageWidth, setMinImageWidth] = useState(400);
-  const [minImageHeight, setMinImageHeight] = useState(400);
-  const [quality, setQuality] = useState(90);
+  const [minImageWidth, setMinImageWidth] = useState(512);
+  const [minImageHeight, setMinImageHeight] = useState(512);
+  // const [quality] = useState(90);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [files, setFiles] = useState<File[]>([]);
   const [compressedImages, setCompressedImages] = useState<
@@ -17,6 +18,7 @@ function App() {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
+      setIsLoading(true);
       setFiles((prev) => [...prev, ...files]);
     }
   };
@@ -32,22 +34,42 @@ function App() {
     });
   };
 
+  useEffect(() => {
+    setIsLoading(false);
+  }, [compressedImages]);
+
   return (
     <div className="container h-screen max-h-screen px-4 py-8 md:px-8 md:py-16 flex flex-col gap-4 overflow-y-auto">
       <h1 className="text-2xl mb-4 md:mb-8 font-bold text-center font-eduBeginner">
         Image compressor
       </h1>
 
-      <div className="grid sm:grid-cols-2 gap-4 lg:grid-cols-4">
-        <div className="col-span-full">
-          <label htmlFor="quality">Quality {quality}%</label>
-          <input
-            type="range"
-            id="quality"
-            value={quality}
-            onChange={(e) => setQuality(parseInt(e.target.value))}
-          />
+      <div className="border-2 w-full min-h-40 border-dashed border-mainText backdrop-blur-3xl rounded-md hover:bg-slate-950/5 duration-200 relative">
+        <input
+          className="w-full h-full opacity-0"
+          type="file"
+          onChange={handleFileChange}
+          accept="image/*"
+          multiple
+        />
+        <div className="text-mainText text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+          <p>Drag and drop or click to select images</p>
+          <FaUpload className="text-2xl inline-block" />
         </div>
+      </div>
+      {/* {!files.length && ( */}
+      {/* // <> */}
+      <p className="font-bold">Settings for the output file</p>
+      <div className="grid sm:grid-cols-2 gap-4 lg:grid-cols-4">
+        {/* <div className="col-span-full">
+              <label htmlFor="quality">Quality {quality}%</label>
+              <input
+                type="range"
+                id="quality"
+                value={quality}
+                onChange={(e) => setQuality(parseInt(e.target.value))}
+              />
+            </div> */}
         <div className="">
           <label htmlFor="maxImageWidth">Max width {maxImageWidth} (px)</label>
           <input
@@ -97,20 +119,8 @@ function App() {
           />
         </div>
       </div>
-
-      <div className="border-2 w-full min-h-40 border-dashed border-mainText backdrop-blur-3xl rounded-md hover:bg-slate-950/5 duration-200 relative">
-        <input
-          className="w-full h-full opacity-0"
-          type="file"
-          onChange={handleFileChange}
-          accept="image/*"
-          multiple
-        />
-        <div className="text-mainText text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-          <p>Drag and drop or click to select images</p>
-          <FaUpload className="text-2xl inline-block" />
-        </div>
-      </div>
+      {/* </> */}
+      {/* // )} */}
 
       {compressedImages.length > 0 && (
         <button
@@ -127,9 +137,19 @@ function App() {
             key={file.name}
             file={file}
             setCompressedImages={setCompressedImages}
+            maxImageWidth={maxImageWidth}
+            maxImageHeight={maxImageHeight}
+            minImageWidth={minImageWidth}
+            minImageHeight={minImageHeight}
+            // quality={quality}
           />
         ))}
       </div>
+      {isLoading && (
+        <div className="flex items-center justify-center">
+          <img src="/loader.svg" alt="loading" className="w-16" />
+        </div>
+      )}
     </div>
   );
 }
