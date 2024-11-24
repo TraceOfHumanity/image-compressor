@@ -49,8 +49,6 @@ input[type="range"]::-moz-range-thumb {
   top: -3px;
 }
 
-/* className="h-1.5 w-full cursor-pointer appearance-none rounded-2xl bg-gradient-to-r from-red-700 via-orange-500 to-green-600 font-bold transition-all duration-300 ease-in-out" */
-
 input[type="range"]::-webkit-slider-runnable-track {
   @apply h-3 w-full cursor-pointer appearance-none rounded-2xl bg-gradient-to-r from-bodyBgTo to-bodyBgFrom font-bold transition-all duration-300 ease-in-out !border !border-black border-solid;
 }

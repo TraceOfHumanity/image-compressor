@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
-import {CompressedImage} from "./components/CompressedImage";
 import {FaDownload, FaUpload} from "react-icons/fa";
+import {Loader} from "./components/Loader";
+import {CompressedImages} from "./components/CompressedImages";
 
 function App() {
   const [maxImageWidth, setMaxImageWidth] = useState(1500);
@@ -57,19 +58,8 @@ function App() {
           <FaUpload className="text-2xl inline-block" />
         </div>
       </div>
-      {/* {!files.length && ( */}
-      {/* // <> */}
       <p className="font-bold">Settings for the output file</p>
       <div className="grid sm:grid-cols-2 gap-4 lg:grid-cols-4">
-        {/* <div className="col-span-full">
-              <label htmlFor="quality">Quality {quality}%</label>
-              <input
-                type="range"
-                id="quality"
-                value={quality}
-                onChange={(e) => setQuality(parseInt(e.target.value))}
-              />
-            </div> */}
         <div className="">
           <label htmlFor="maxImageWidth">Max width {maxImageWidth} (px)</label>
           <input
@@ -119,8 +109,6 @@ function App() {
           />
         </div>
       </div>
-      {/* </> */}
-      {/* // )} */}
 
       {compressedImages.length > 0 && (
         <button
@@ -130,26 +118,15 @@ function App() {
           Download all <FaDownload />
         </button>
       )}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:grid-cols-3 pb-5 md:pb-16">
-        {files.map((file) => (
-          <CompressedImage
-            key={file.name}
-            file={file}
-            setCompressedImages={setCompressedImages}
-            maxImageWidth={maxImageWidth}
-            maxImageHeight={maxImageHeight}
-            minImageWidth={minImageWidth}
-            minImageHeight={minImageHeight}
-            // quality={quality}
-          />
-        ))}
-      </div>
-      {isLoading && (
-        <div className="flex items-center justify-center">
-          <img src="/loader.svg" alt="loading" className="w-16" />
-        </div>
-      )}
+      <CompressedImages
+        files={files}
+        setCompressedImages={setCompressedImages}
+        maxImageWidth={maxImageWidth}
+        maxImageHeight={maxImageHeight}
+        minImageWidth={minImageWidth}
+        minImageHeight={minImageHeight}
+      />
+      {isLoading && <Loader />}
     </div>
   );
 }

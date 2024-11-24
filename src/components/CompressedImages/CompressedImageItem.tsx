@@ -3,8 +3,20 @@ import Resizer from "react-image-file-resizer";
 import prettyBytes from "pretty-bytes";
 import {FaDownload} from "react-icons/fa";
 import {MdPhotoSizeSelectActual, MdPhotoSizeSelectLarge} from "react-icons/md";
+import {CompressedImagesProps} from "./index";
 
-export const CompressedImage = ({
+type CompressedImageItemProps = Omit<CompressedImagesProps, "files"> & {
+  file: File;
+};
+
+type CompressedFile = {
+  url: string;
+  size: number;
+  type: string;
+  name: string;
+};
+
+export const CompressedImageItem = ({
   file,
   setCompressedImages,
   maxImageWidth = 2000,
@@ -12,32 +24,10 @@ export const CompressedImage = ({
   minImageWidth = 400,
   minImageHeight = 400,
   quality = 90,
-}: {
-  file: File;
-  setCompressedImages: React.Dispatch<
-    React.SetStateAction<
-      {url: string; size: number; type: string; name: string}[]
-    >
-  >;
-  maxImageWidth: number;
-  maxImageHeight: number;
-  minImageWidth: number;
-  minImageHeight: number;
-  quality?: number;
-}) => {
-  const [newImage, setNewImage] = useState<{
-    url: string;
-    size: number;
-    type: string;
-    name: string;
-  }>();
+}: CompressedImageItemProps) => {
+  const [newImage, setNewImage] = useState<CompressedFile>();
 
-  const handleImage = (image: {
-    url: string;
-    size: number;
-    type: string;
-    name: string;
-  }) => {
+  const handleImage = (image: CompressedFile) => {
     setNewImage(image);
     setCompressedImages((prev) => [...prev, image]);
   };
