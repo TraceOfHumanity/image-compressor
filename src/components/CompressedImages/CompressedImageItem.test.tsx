@@ -11,13 +11,12 @@ test("renders CompressedImageItem component", () => {
     <CompressedImageItem
       file={file}
       setCompressedImages={mockSetCompressedImages}
-      maxImageWidth={1000} // Add appropriate value
-      maxImageHeight={1000} // Add appropriate value
-      minImageWidth={100} // Add appropriate value
-      minImageHeight={100} // Add appropriate value
+      maxImageWidth={1000}
+      maxImageHeight={1000}
+      minImageWidth={100}
+      minImageHeight={100}
     />
   );
 
-  // Перевірте, що компонент рендериться
   expect(screen.getByRole("button")).toBeInTheDocument();
 });
