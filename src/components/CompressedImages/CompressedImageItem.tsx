@@ -73,7 +73,7 @@ export const CompressedImageItem = ({
   };
 
   return (
-    <div className="flex flex-col gap-2 relative group border border-black rounded-md p-1">
+    <div className="flex flex-col gap-2 relative group border border-black rounded-md p-1 backdrop-blur">
       <button
         className="absolute top-1 right-1 rounded-full bg-white p-2 opacity-0 group-hover:opacity-100"
         onClick={handleDownload}
