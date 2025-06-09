@@ -1,11 +1,9 @@
-import { CompressedFile } from "@/types/imageCompressorTypes";
 import {FaDownload} from "react-icons/fa";
+import { useImageCompressor } from "@/hooks/useImageCompressor";
 
-export const Actions = ({
-  compressedImages,
-}: {
-  compressedImages: CompressedFile[];
-}) => {
+export const Actions = () => {
+  const { compressedImages } = useImageCompressor();
+  
   const downloadAll = () => {
     compressedImages.forEach((image) => {
       const a = document.createElement("a");

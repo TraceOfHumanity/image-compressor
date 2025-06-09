@@ -1,13 +1,10 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Resizer from "react-image-file-resizer";
 import prettyBytes from "pretty-bytes";
 import {FaDownload} from "react-icons/fa";
 import {MdPhotoSizeSelectActual, MdPhotoSizeSelectLarge} from "react-icons/md";
-import {CompressedImagesProps} from "./CompressedImages";
-
-type CompressedImageItemProps = Omit<CompressedImagesProps, "files"> & {
-  file: File;
-};
+import { ImageCompressorContext } from "@/context/ImageCompressorContext";
+import { ImageCompressorSettings } from "@/types/imageCompressorTypes";
 
 type CompressedFile = {
   url: string;
@@ -18,18 +15,15 @@ type CompressedFile = {
 
 export const CompressedImageItem = ({
   file,
-  setCompressedImages,
-  maxImageWidth = 2000,
-  maxImageHeight = 2000,
-  minImageWidth = 400,
-  minImageHeight = 400,
-  quality = 90,
-}: CompressedImageItemProps) => {
+}: {
+  file: File;
+}) => {
   const [newImage, setNewImage] = useState<CompressedFile>();
+  const { setCompressedImages, compressedImages, maxImageWidth, maxImageHeight, minImageWidth, minImageHeight } = useContext(ImageCompressorContext) as ImageCompressorSettings;
 
   const handleImage = (image: CompressedFile) => {
     setNewImage(image);
-    setCompressedImages((prev) => [...prev, image]);
+    setCompressedImages([...compressedImages, image]);
   };
 
   useEffect(() => {
@@ -42,7 +36,7 @@ export const CompressedImageItem = ({
           maxImageHeight,
           // file.type === "image/jpeg" ? "JPEG" : file.type,
           "JPEG",
-          quality,
+          90,
           0,
           (blob) => {
             handleImage({

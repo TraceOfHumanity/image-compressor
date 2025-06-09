@@ -1,24 +1,17 @@
-type ImageSettingsProps = {
-  maxImageWidth: number;
-  maxImageHeight: number;
-  minImageWidth: number;
-  minImageHeight: number;
-  setMaxImageWidth: React.Dispatch<React.SetStateAction<number>>;
-  setMaxImageHeight: React.Dispatch<React.SetStateAction<number>>;
-  setMinImageWidth: React.Dispatch<React.SetStateAction<number>>;
-  setMinImageHeight: React.Dispatch<React.SetStateAction<number>>;
-};
+import { useImageCompressor } from "@/hooks/useImageCompressor";
 
-export const Settings = ({
-  maxImageWidth,
-  maxImageHeight,
-  minImageWidth,
-  minImageHeight,
-  setMaxImageWidth,
-  setMaxImageHeight,
-  setMinImageWidth,
-  setMinImageHeight,
-}: ImageSettingsProps) => {
+export const Settings = () => {
+  const {
+    maxImageWidth,
+    maxImageHeight,
+    minImageWidth,
+    minImageHeight,
+    setMaxImageWidth,
+    setMaxImageHeight,
+    setMinImageWidth,
+    setMinImageHeight,
+  } = useImageCompressor();
+
   const settingsItems = [
     {
       label: "Max width",
@@ -41,7 +34,7 @@ export const Settings = ({
       id: "minImageWidth",
       value: minImageWidth,
       setValue: setMinImageWidth,
-      min: 100,
+      min: 800,
       max: maxImageWidth - 200,
     },
     {
@@ -49,6 +42,8 @@ export const Settings = ({
       id: "minImageHeight",
       value: minImageHeight,
       setValue: setMinImageHeight,
+      min: 800,
+      max: maxImageHeight - 200,
     },
   ];
   return (
@@ -56,7 +51,7 @@ export const Settings = ({
       <p className="font-bold">Settings for the output file</p>
       <div className="grid sm:grid-cols-2 gap-4 lg:grid-cols-4">
         {settingsItems.map((item) => (
-          <div className="">
+          <div className="flex flex-col gap-2" key={item.id}>
             <label htmlFor={item.id}>
               {item.label} {item.value} (px)
             </label>

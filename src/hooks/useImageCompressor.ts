@@ -6,8 +6,8 @@ export const useImageCompressor = (): ImageCompressorSettings => {
   const [isLoading, setIsLoading] = useState(false);
   const [maxImageWidth, setMaxImageWidth] = useState(1500);
   const [maxImageHeight, setMaxImageHeight] = useState(1500);
-  const [minImageWidth, setMinImageWidth] = useState(512);
-  const [minImageHeight, setMinImageHeight] = useState(512);
+  const [minImageWidth, setMinImageWidth] = useState(800);
+  const [minImageHeight, setMinImageHeight] = useState(800);
 
   const [files, setFiles] = useState<File[]>([]);
 
