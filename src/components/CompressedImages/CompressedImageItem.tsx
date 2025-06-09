@@ -40,8 +40,8 @@ export const CompressedImageItem = ({
           file,
           maxImageWidth,
           maxImageHeight,
-          file.type === "image/jpeg" ? "JPEG" : file.type,
-          // "JPEG",
+          // file.type === "image/jpeg" ? "JPEG" : file.type,
+          "JPEG",
           quality,
           0,
           (blob) => {

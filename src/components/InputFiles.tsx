@@ -11,6 +11,7 @@ export const InputFiles = ({
 }) => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
+    console.log("Files received", files);
     if (files) {
       setIsLoading(true);
       setFiles([...prevFiles, ...Array.from(files)]);
