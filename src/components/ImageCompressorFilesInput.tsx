@@ -1,6 +1,6 @@
 import {FaUpload} from "react-icons/fa";
 
-export const InputFiles = ({
+export const FilesInput = ({
   prevFiles,
   setIsLoading,
   setFiles,

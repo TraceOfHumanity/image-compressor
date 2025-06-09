@@ -1,11 +1,6 @@
 import {useEffect, useState} from "react";
 import {Loader} from "./components/Loader";
-import {CompressedImages} from "./components/CompressedImages";
-import {ImageSettings} from "./components/ImageSettings";
-import {DownloadAllImages} from "./components/DownloadAllImages";
-import {InputFiles} from "./components/InputFiles";
-import {Title} from "./components/Title";
-import {MainContainer} from "./components/MainContainer";
+import {ImageCompressor} from "./components/ImageCompressor";
 
 export type CompressedFile = {
   url: string;
@@ -31,14 +26,14 @@ function App() {
   }, [compressedImages]);
 
   return (
-    <MainContainer>
-      <Title />
-      <InputFiles
+    <ImageCompressor>
+      <ImageCompressor.Title />
+      <ImageCompressor.FilesInput
         prevFiles={files}
         setIsLoading={setIsLoading}
         setFiles={setFiles}
       />
-      <ImageSettings
+      <ImageCompressor.Settings
         maxImageWidth={maxImageWidth}
         maxImageHeight={maxImageHeight}
         minImageWidth={minImageWidth}
@@ -48,8 +43,8 @@ function App() {
         setMinImageWidth={setMinImageWidth}
         setMinImageHeight={setMinImageHeight}
       />
-      <DownloadAllImages compressedImages={compressedImages} />
-      <CompressedImages
+      <ImageCompressor.Actions compressedImages={compressedImages} />
+      <ImageCompressor.CompressedImages
         files={files}
         setCompressedImages={setCompressedImages}
         maxImageWidth={maxImageWidth}
@@ -58,7 +53,7 @@ function App() {
         minImageHeight={minImageHeight}
       />
       {isLoading && <Loader />}
-    </MainContainer>
+    </ImageCompressor>
   );
 }
 

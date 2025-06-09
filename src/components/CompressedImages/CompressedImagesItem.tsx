@@ -3,7 +3,7 @@ import Resizer from "react-image-file-resizer";
 import prettyBytes from "pretty-bytes";
 import {FaDownload} from "react-icons/fa";
 import {MdPhotoSizeSelectActual, MdPhotoSizeSelectLarge} from "react-icons/md";
-import {CompressedImagesProps} from "./index";
+import {CompressedImagesProps} from "./CompressedImages";
 
 type CompressedImageItemProps = Omit<CompressedImagesProps, "files"> & {
   file: File;

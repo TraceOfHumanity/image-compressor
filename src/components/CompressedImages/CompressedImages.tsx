@@ -1,4 +1,4 @@
-import {CompressedImageItem} from "./CompressedImageItem";
+import {CompressedImageItem} from "./CompressedImagesItem";
 
 export type CompressedImagesProps = {
   files: File[];

@@ -9,7 +9,7 @@ type ImageSettingsProps = {
   setMinImageHeight: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export const ImageSettings = ({
+export const Settings = ({
   maxImageWidth,
   maxImageHeight,
   minImageWidth,
