@@ -1,20 +1,15 @@
+import { ImageCompressorContext } from "@/context/ImageCompressorContext";
+import { ImageCompressorSettings } from "@/types/imageCompressorTypes";
+import { useContext } from "react";
 import {FaUpload} from "react-icons/fa";
 
-export const FilesInput = ({
-  prevFiles,
-  setIsLoading,
-  setFiles,
-}: {
-  prevFiles: File[];
-  setIsLoading: (isLoading: boolean) => void;
-  setFiles: (files: File[]) => void;
-}) => {
+export const FilesInput = () => {
+  const { setIsLoading, setFiles, files: existingFiles } = useContext(ImageCompressorContext) as ImageCompressorSettings;
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
-    console.log("Files received", files);
     if (files) {
       setIsLoading(true);
-      setFiles([...prevFiles, ...Array.from(files)]);
+      setFiles([...existingFiles, ...Array.from(files)]);
     }
   };
 
