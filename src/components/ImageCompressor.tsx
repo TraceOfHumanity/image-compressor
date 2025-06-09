@@ -1,14 +1,19 @@
+import { useImageCompressor } from "@/hooks/useImageCompressor";
 import { CompressedImages } from "./CompressedImages/CompressedImages";
 import { Actions } from "./ImageCompressorActions";
 import { FilesInput } from "./ImageCompressorFilesInput";
 import { Settings } from "./ImageCompressorSettings";
 import { Title } from "./ImageCompressorTitle";
+import { ImageCompressorContext } from "@/context/ImageCompressorContext";
 
 export const ImageCompressor = ({children}: {children: React.ReactNode}) => {
+  const contextValue = useImageCompressor();
   return (
-    <div className="container h-screen max-h-screen px-4 py-8 md:px-8 md:py-16 flex flex-col gap-4 overflow-y-auto">
-      {children}
-    </div>
+    <ImageCompressorContext.Provider value={contextValue}>
+      <div className="container h-screen max-h-screen px-4 py-8 md:px-8 md:py-16 flex flex-col gap-4 overflow-y-auto">
+        {children}
+      </div>
+    </ImageCompressorContext.Provider>
   );
 };
 

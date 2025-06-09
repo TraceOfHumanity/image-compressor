@@ -1,5 +1,5 @@
+import { CompressedFile } from "@/types/imageCompressorTypes";
 import {FaDownload} from "react-icons/fa";
-import {CompressedFile} from "../App";
 
 export const Actions = ({
   compressedImages,

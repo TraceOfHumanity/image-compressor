@@ -1,13 +1,7 @@
 import {useEffect, useState} from "react";
 import {Loader} from "./components/Loader";
 import {ImageCompressor} from "./components/ImageCompressor";
-
-export type CompressedFile = {
-  url: string;
-  size: number;
-  type: string;
-  name: string;
-};
+import { CompressedFile } from "./types/imageCompressorTypes";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
