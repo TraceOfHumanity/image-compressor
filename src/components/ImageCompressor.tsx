@@ -5,6 +5,7 @@ import { FilesInput } from "./ImageCompressorFilesInput";
 import { Settings } from "./ImageCompressorSettings";
 import { Title } from "./ImageCompressorTitle";
 import { ImageCompressorContext } from "@/context/ImageCompressorContext";
+import { Loader } from "./Loader";
 
 export const ImageCompressor = ({children}: {children: React.ReactNode}) => {
   const contextValue = useImageCompressor();
@@ -22,4 +23,5 @@ ImageCompressor.FilesInput = FilesInput;
 ImageCompressor.Settings = Settings;
 ImageCompressor.Actions = Actions;
 ImageCompressor.CompressedImages = CompressedImages;
+ImageCompressor.Loader = Loader;
 

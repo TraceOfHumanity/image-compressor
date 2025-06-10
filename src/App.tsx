@@ -8,6 +8,7 @@ function App() {
       <ImageCompressor.Settings />
       <ImageCompressor.Actions />
       <ImageCompressor.CompressedImages />
+      <ImageCompressor.Loader />
     </ImageCompressor>
   );
 }
