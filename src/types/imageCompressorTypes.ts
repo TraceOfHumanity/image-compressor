@@ -19,5 +19,9 @@ export type ImageCompressorSettings = {
   files: File[];
   setFiles: (files: File[]) => void;
   compressedImages: CompressedFile[];
-  setCompressedImages: (compressedImages: CompressedFile[] | ((prevImages: CompressedFile[]) => CompressedFile[])) => void;
+  setCompressedImages: (
+    compressedImages:
+      | CompressedFile[]
+      | ((prevImages: CompressedFile[]) => CompressedFile[]),
+  ) => void;
 };

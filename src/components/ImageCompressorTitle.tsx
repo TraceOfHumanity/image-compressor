@@ -1,6 +1,6 @@
 export const Title = () => {
   return (
-    <h1 className="text-2xl mb-4 md:mb-8 font-bold text-center font-eduBeginner">
+    <h1 className='mb-4 text-center font-eduBeginner text-2xl font-bold md:mb-8'>
       Image compressor
     </h1>
   );

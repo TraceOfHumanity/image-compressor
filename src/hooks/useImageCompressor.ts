@@ -1,6 +1,6 @@
-import { CompressedFile } from "@/types/imageCompressorTypes";
-import { useEffect, useState } from "react";
-import type { ImageCompressorSettings } from "@/types/imageCompressorTypes";
+import {CompressedFile} from '@/types/imageCompressorTypes';
+import {useEffect, useState} from 'react';
+import type {ImageCompressorSettings} from '@/types/imageCompressorTypes';
 
 export const useImageCompressor = (): ImageCompressorSettings => {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,7 +12,7 @@ export const useImageCompressor = (): ImageCompressorSettings => {
   const [files, setFiles] = useState<File[]>([]);
 
   const [compressedImages, setCompressedImages] = useState<CompressedFile[]>(
-    []
+    [],
   );
 
   useEffect(() => {
@@ -34,5 +34,5 @@ export const useImageCompressor = (): ImageCompressorSettings => {
     setFiles,
     compressedImages,
     setCompressedImages,
-  }
-}
+  };
+};
