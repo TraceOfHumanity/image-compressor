@@ -5,13 +5,7 @@ import {FaDownload} from "react-icons/fa";
 import {MdPhotoSizeSelectActual, MdPhotoSizeSelectLarge} from "react-icons/md";
 import { ImageCompressorContext } from "@/context/ImageCompressorContext";
 import { ImageCompressorSettings } from "@/types/imageCompressorTypes";
-
-type CompressedFile = {
-  url: string;
-  size: number;
-  type: string;
-  name: string;
-};
+import { CompressedFile } from "@/types/imageCompressorTypes";
 
 export const CompressedImageItem = ({
   file,
@@ -19,14 +13,15 @@ export const CompressedImageItem = ({
   file: File;
 }) => {
   const [newImage, setNewImage] = useState<CompressedFile>();
-  const { setCompressedImages, compressedImages, maxImageWidth, maxImageHeight, minImageWidth, minImageHeight } = useContext(ImageCompressorContext) as ImageCompressorSettings;
+  const { setCompressedImages, maxImageWidth, maxImageHeight, minImageWidth, minImageHeight } = useContext(ImageCompressorContext) as ImageCompressorSettings;
 
   const handleImage = (image: CompressedFile) => {
     setNewImage(image);
-    setCompressedImages([...compressedImages, image]);
+    setCompressedImages((prevImages: CompressedFile[]) => [...prevImages, image]);
   };
 
   useEffect(() => {
+    console.log(maxImageWidth, maxImageHeight, minImageWidth, minImageHeight);
     if (file) {
       console.log("File received", file);
       try {

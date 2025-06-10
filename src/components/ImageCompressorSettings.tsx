@@ -1,4 +1,6 @@
-import { useImageCompressor } from "@/hooks/useImageCompressor";
+import { useContext } from "react";
+import { ImageCompressorContext } from "@/context/ImageCompressorContext";
+import { ImageCompressorSettings } from "@/types/imageCompressorTypes";
 
 export const Settings = () => {
   const {
@@ -10,7 +12,7 @@ export const Settings = () => {
     setMaxImageHeight,
     setMinImageWidth,
     setMinImageHeight,
-  } = useImageCompressor();
+  } = useContext(ImageCompressorContext) as ImageCompressorSettings;
 
   const settingsItems = [
     {
@@ -34,7 +36,7 @@ export const Settings = () => {
       id: "minImageWidth",
       value: minImageWidth,
       setValue: setMinImageWidth,
-      min: 800,
+      min: 512,
       max: maxImageWidth - 200,
     },
     {
@@ -42,7 +44,7 @@ export const Settings = () => {
       id: "minImageHeight",
       value: minImageHeight,
       setValue: setMinImageHeight,
-      min: 800,
+      min: 512,
       max: maxImageHeight - 200,
     },
   ];
